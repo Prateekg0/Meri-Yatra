@@ -19,7 +19,9 @@ const User = require("./models/user.js");
 
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
-const userRouter = require("./routes/user.js")
+const userRouter = require("./routes/user.js");
+const port = process.env.PORT || 4000;
+
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
@@ -113,3 +115,11 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render("error.ejs",{message});
     // res.render("error.ejs");
 });
+
+
+
+
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
