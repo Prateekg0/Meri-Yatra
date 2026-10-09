@@ -2,7 +2,7 @@ if(process.env.NODE_ENV != "production"){
     require("dotenv").config();
 };
 
-console.log(process.env.SECRET);
+// console.log(process.env.SECRET);
 const express = require("express");
 const app = express();
 const mongoose=require("mongoose");
@@ -51,7 +51,7 @@ const store = MongoStore.create({
     touchAfter: 24*3600,
 });
 
-store.on("error",()=>{
+store.on("error",(err)=>{
     console.log("Error in MONGO SESSION STORE",err);
 });
 
@@ -59,7 +59,7 @@ const sessionOptions ={
     store,
     secret: process.env.SECRET,
     resave: false,
-    saveUninitailized: true,
+    saveUninitailized: false,
     cookie:{
         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -119,7 +119,7 @@ app.use((err,req,res,next)=>{
 
 
 
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+module.exports = app;
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
